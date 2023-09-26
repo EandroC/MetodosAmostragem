@@ -1,0 +1,36 @@
+---
+title: "Amostragem"
+---
+Se fosse um CSV que não estivesse dentro do RStudio
+```{r}
+#dados <- read.csv("..\\Dados\\Iris.csv", header=TRUE, stringsAsFactors=FALSE) 
+#dados
+```
+
+Amostragem Aleatória Simples
+obs: sem fosse csv importado substituia "iris" pela variável criada "dados"
+```{r}
+#Sem reposição
+x<- sample(1:nrow(iris), 75)
+x
+
+amostra<- dados[x, ]
+amostra
+
+Duplicados =  amostra[duplicated(amostra$Id),]
+Duplicados
+
+```
+```{r}
+#Com reposição
+x<- sample(1:nrow(iris), 75, replace = TRUE)
+x
+
+amostra<- dados[x, ]
+amostra
+
+Duplicados =  amostra[duplicated(amostra$Id),]
+Duplicados
+```
+
+
