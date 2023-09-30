@@ -3,17 +3,19 @@ title: "Amostragem"
 ---
 Se fosse um CSV que não estivesse dentro do RStudio
 ```{r}
-#dados <- read.csv("..\\Dados\\Iris.csv", header=TRUE, stringsAsFactors=FALSE) 
-#dados
+dados <- read.csv("..\\Dados\\Iris.csv", header=TRUE, stringsAsFactors=FALSE) 
+dados
 ```
 
 Amostragem Aleatória Simples
 obs: sem fosse csv importado substituia "iris" pela variável criada "dados"
 ```{r}
 #Sem reposição
-x<- sample(1:nrow(iris), 75)
+#nrow: número de linhas
+x<- sample(1:nrow(dados), 75)
 x
 
+#vou pesquisar a linhas do csv de acordo com o vetor a aleatório que foi criado(deixando o espaço da coluna em branco quer dizer que desejo a todas a colunas) 
 amostra<- dados[x, ]
 amostra
 
@@ -23,7 +25,7 @@ Duplicados
 ```
 ```{r}
 #Com reposição
-x<- sample(1:nrow(iris), 75, replace = TRUE)
+x<- sample(1:nrow(dados), 75, replace = TRUE)
 x
 
 amostra<- dados[x, ]
@@ -33,4 +35,16 @@ Duplicados =  amostra[duplicated(amostra$Id),]
 Duplicados
 ```
 
+Amostragem Sistemática
+```{R}
 
+amostra <- dados[1 + 2 * (0:(75 - 1)), ]
+print(amostra)
+
+
+```
+
+
+```{R}
+
+```
