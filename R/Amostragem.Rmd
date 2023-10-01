@@ -8,14 +8,13 @@ dados
 ```
 
 Amostragem Aleatória Simples
-obs: sem fosse csv importado substituia "iris" pela variável criada "dados"
 ```{r}
 #Sem reposição
 #nrow: número de linhas
 x<- sample(1:nrow(dados), 75)
 x
 
-#vou pesquisar a linhas do csv de acordo com o vetor a aleatório que foi criado(deixando o espaço da coluna em branco quer dizer que desejo a todas a colunas) 
+#vou pesquisar a linhas do csv de acordo com o vetor a aleatório que foi criado(deixar o espaço da coluna em branco quer dizer que desejo a todas a colunas) 
 amostra<- dados[x, ]
 amostra
 
@@ -44,7 +43,32 @@ print(amostra)
 
 ```
 
+Amostragem estratificada
+```{r}
+#install.packages("dplyr")
+library(dplyr)
 
-```{R}
+amostra <- dados %>%
+  group_by(PetalWidthCm) %>%
+  sample_n(size = 1)
+
+amostra
+```
+
+```{r}
+teste <- dados %>%
+  count(PetalWidthCm, sort = TRUE) %>%
+  mutate(percent = 100 * n/ sum(n))
+
+teste
+```
+Amostragem por conglomerados
+```{r}
+#size irá escolher, no exemplo, uma specie entre as variáveis da coluna.
+species <- sample( unique (dados$Species), size=1)
+
+#assim todas a linhas com essa specie iram ser selecionadas para a amostra
+amostra <- dados[dados$Species %in% species, ]
+amostra
 
 ```
